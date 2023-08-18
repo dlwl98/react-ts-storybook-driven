@@ -9,7 +9,7 @@ type Props = {
   width: number;
   height: number;
   alt: string;
-  mode: 'cover' | 'fill' | 'contain';
+  mode: CSSProperties['objectFit'];
 };
 
 const LOAD_IMG_EVENT_LABEL = 'loadImage';
