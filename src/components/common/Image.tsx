@@ -1,16 +1,20 @@
 import { CSSProperties, useEffect, useRef, useState } from 'react';
+import { BuildFCProps } from '../../types';
 
-type Props = {
-  lazy?: boolean;
-  threshold?: number;
-  placeholder?: string;
-  src: string;
-  block?: boolean;
-  width: number;
-  height: number;
-  alt: string;
-  mode: CSSProperties['objectFit'];
-};
+type Props = BuildFCProps<
+  {
+    lazy?: boolean;
+    threshold?: number;
+    placeholder?: string;
+    src: string;
+    block?: boolean;
+    width: number;
+    height: number;
+    alt: string;
+    mode: CSSProperties['objectFit'];
+  },
+  HTMLImageElement
+>;
 
 const LOAD_IMG_EVENT_LABEL = 'loadImage';
 
@@ -36,6 +40,7 @@ const Image = ({
   height,
   alt,
   mode,
+  ...props
 }: Props) => {
   const [loaded, setLoaded] = useState(false);
   const imgRef = useRef<HTMLImageElement | null>(null);
@@ -78,7 +83,8 @@ const Image = ({
       ref={imgRef}
       src={loaded ? src : placeholder}
       alt={alt}
-      style={{ ...imgStyle }}
+      css={{ ...imgStyle }}
+      {...props}
     />
   );
 };
